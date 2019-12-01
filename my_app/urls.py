@@ -5,4 +5,5 @@ from my_app import views
 
 urlpatterns = [
     path('', views.Home, name='home_page'),
+    path('search', views.search, name='new_search')
 ]
