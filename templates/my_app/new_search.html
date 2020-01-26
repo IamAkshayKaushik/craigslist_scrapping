@@ -1,54 +1,35 @@
 {% extends 'base.html' %}
 {% block content %}
     <div class="container">
-        <div class="row">
-            <div class="col s4">
-                <div class="card">
-                    <div class="card-image">
-                        <img src="">
-                        <span class="card-title">Card Title</span>
-                    </div>
-                    <div class="card-content">
-                        <p>I am a very simple card. I am good at containing small bits of information.
-                            I am convenient because I require little markup to use effectively.</p>
-                    </div>
-                    <div class="card-action">
-                        <a href="#">This is a link</a>
-                    </div>
-                </div>
-            </div>
+    <h2 style="text-align: center;font-size: 3rem">{{ search_content | title}}</h2>
+    {% for item in post_listings %}
+        {% ifequal forloop.counter 1 %}
+            <div class="row">
+        {% endifequal %}
+
+        {% ifequal forloop.counter|divisibleby:"3" True %}
+            <div class="row">
+        {% endifequal %}
+
 
             <div class="col s4">
                 <div class="card">
                     <div class="card-image">
-                        <img src="">
-                        <span class="card-title">Card Title</span>
+                        <img src="https://static1.squarespace.com/static/582df1a059cc6819b296dc18/59b0346be5dd5bf05630284b/59b03483cf81e08cebd27669/1504720252596/250px-Wellcome_Trust_logo.svg.png?format=1500w">
                     </div>
-                    <div class="card-content">
-                        <p>I am a very simple card. I am good at containing small bits of information.
-                            I am convenient because I require little markup to use effectively.</p>
-                    </div>
+                    <div class="card-title" >{{ item.0 | title }}</div>
+{#                    <div class="card-content">#}
+{#                        <p>I am a very simple card. I am good at containing small bits of information.#}
+{#                            I am convenient because I require little markup to use effectively.</p>#}
+{#                    </div>#}
                     <div class="card-action">
-                        <a href="#">This is a link</a>
+                        <a href="{{ item.1 | lower}}">{{ item.1 | lower}}</a>
                     </div>
                 </div>
             </div>
-
-            <div class="col s4">
-                <div class="card">
-                    <div class="card-image">
-                        <img src="#">
-                        <span class="card-title">Card Title</span>
-                    </div>
-                    <div class="card-content">
-                        <p>I am a very simple card. I am good at containing small bits of information.
-                            I am convenient because I require little markup to use effectively.</p>
-                    </div>
-                    <div class="card-action">
-                        <a href="#">This is a link</a>
-                    </div>
-                </div>
+        {% ifequal forloop.counter|divisibleby:"3" True %}
             </div>
-        </div>
+        {% endifequal %}
+    {% endfor %}
     </div>
 {% endblock content %}
