@@ -15,7 +15,7 @@
             <div class="col s4">
                 <div class="card">
                     <div class="card-image">
-                        <img src="https://static1.squarespace.com/static/582df1a059cc6819b296dc18/59b0346be5dd5bf05630284b/59b03483cf81e08cebd27669/1504720252596/250px-Wellcome_Trust_logo.svg.png?format=1500w">
+                        <img src="{{ item.3 }}" style="width: 300px; height: 250px">
                     </div>
                     <div class="card-title" >{{ item.0 | title }}</div>
 {#                    <div class="card-content">#}
@@ -23,7 +23,7 @@
 {#                            I am convenient because I require little markup to use effectively.</p>#}
 {#                    </div>#}
                     <div class="card-action">
-                        <a href="{{ item.1 | lower}}">{{ item.1 | lower}}</a>
+                        <a href="{{ item.1 | lower}}">Click Here to go</a>
                     </div>
                 </div>
             </div>

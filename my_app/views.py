@@ -8,6 +8,7 @@ from . import models
 from bs4 import BeautifulSoup
 
 base_url = "https://delhi.craigslist.org/search/bbb?query="
+image_base_url = "https://images.craigslist.org/{}_300x300.jpg"
 user_agent_list = [
    #Chrome
     'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36',
@@ -61,22 +62,19 @@ def search(request):
             if(post_price):
                 post_price = post_price.text
             else:
-                post_price = None
+                post_price = 'NA'
             post_image_ids = post.find('a',{'class':'result-image'}).get('data-ids')
             if post_image_ids:
-                post_image_ids = post_image_ids.split(',')
-                if(len(post_image_ids) > 0):
-                    post_image_final_id_list = []
-                    for image_id in post_image_ids:
-                        final_id = image_id.split(':')[-1]
-                        post_image_final_id_list.append(final_id)
-            post_listings.append((post_title, post_url, post_price, post_image_final_id_list))
+                post_image_ids = post_image_ids.split(',')[0].split(':')[-1]
+                post_image_url = image_base_url.format(post_image_ids)
+            else:
+                post_image_url = "https://craigslist.org/images/peace.jpg"
+            post_listings.append((post_title, post_url, post_price, post_image_url))
 
         stuff_for_frontend = {
             'search_content':search_content,
             'post_listings':post_listings
         }
-        print(stuff_for_frontend)
         return render(request, 'my_app/new_search.html', stuff_for_frontend)
     else:
         return render(request, 'base.html')
